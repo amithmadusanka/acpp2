@@ -105,7 +105,7 @@ function generatePDF(type) {
     pdfItems.innerHTML = '';
     
     let itemsLogArray = [];
-    let pdfCalculatedTotal = 0; // PDF එකේ අඩංගු වන සියලුම අයිතමවල එකතුව ගණනය කිරීමට
+    let pdfCalculatedTotal = 0; // PDF වගුව ඇතුළතම මුළු එකතුව අලුතින් ගණනය කිරීමට
     const rows = itemsContainer.querySelectorAll('.item-row');
     
     rows.forEach((row, index) => {
@@ -116,7 +116,7 @@ function generatePDF(type) {
 
         if(desc) {
             itemsLogArray.push({ desc, qty, price });
-            pdfCalculatedTotal += total; // වලංගු අයිතමවල එකතුව පමණක් මෙහිදී එකතු වේ
+            pdfCalculatedTotal += total; // වලංගු අයිතමවල එකතුව පමණක් එකතු වේ
             
             const rowBg = index % 2 === 0 ? '#ffffff' : '#fcfcfc';
             pdfItems.innerHTML += `
@@ -135,8 +135,10 @@ function generatePDF(type) {
         return;
     }
 
-    // නිවැරදිම ගණනය කළ එකතුව (LKR Total) PDF එකේ අදාළ ස්ථානයට යැවීම
+    // නිවැරදිව ගණනය කළ අවසාන මුළු එකතුව (Formatted Total)
     const finalFormattedTotal = pdfCalculatedTotal.toFixed(2);
+    
+    // PDF එකෙහි අගය පෙන්වන span එකට මෙම නිවැරදි අගය ආදේශ කිරීම
     document.getElementById('pdf-total-val').innerText = finalFormattedTotal;
 
     // Add Software Credit Row dynamically inside the print template before rendering
@@ -150,7 +152,6 @@ function generatePDF(type) {
     }
 
     if(itemsLogArray.length > 0) {
-        // හිස්ට්‍රි එකටත් මේ නිවැරදි එකතුවම යවන්න සකසා ඇත
         saveDocumentToHistory(type, docNum, clientName, finalFormattedTotal, docDate);
     }
 
