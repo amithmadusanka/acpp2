@@ -147,11 +147,11 @@
         </div>
     </div>
 
-    <div id="pdf-template" style="display: none; background: #ffffff !important; color: #000000 !important;">
-        <div class="pdf-wrapper" style="background: #ffffff !important; color: #000000 !important;">
-          <div class="pdf-inner-frame" style="background: #ffffff !important;">
+    <div id="pdf-template" style="display: none; background: #ffffff !important; color: #000000 !important; width: 100%; box-sizing: border-box;">
+        <div class="pdf-wrapper" style="background: #ffffff !important; color: #000000 !important; border: 3px solid #2c3e50; padding: 10px; width: 100%; box-sizing: border-box;">
+          <div class="pdf-inner-frame" style="background: #ffffff !important; border: 1px solid #2c3e50; padding: 22px; box-sizing: border-box;">
 
-            <div class="pdf-head-row">
+            <div class="pdf-head-row" style="display: flex; justify-content: space-between; align-items: flex-start; border-bottom: 2px solid #2c3e50; padding-bottom: 15px;">
                 <div>
                     <h2 id="pdf-comp-name" style="margin:0 0 5px 0; color:#2c3e50; font-size:22px;">Company Name</h2>
                     <p id="pdf-comp-details" style="margin:0; font-size:12px; color:#555; white-space:pre-line;">Company Contacts</p>
@@ -186,16 +186,16 @@
             <div class="pdf-bottom-block" style="margin-top: 40px; color: #000000 !important;">
                 <table style="width: 100%; border-collapse: collapse;">
                     <tr>
-                        <td style="width: 50%; vertical-align: bottom;">
+                        <td style="width: 55%; vertical-align: bottom;">
                             <div class="pdf-signature-area" style="width: 160px; text-align: center;">
                                 <div style="border-bottom: 1px solid #000; height: 40px;"></div>
                                 <p style="margin: 5px 0 0 0; font-size: 12px; color: #555; font-weight: bold;">Authorized Signature</p>
                             </div>
                         </td>
-                        <td style="width: 50%; text-align: right; vertical-align: top;">
-                            <div style="display: inline-block; border-bottom: 3px double #2c3e50; padding: 5px 10px; min-width: 200px; text-align: right;">
+                        <td style="width: 45%; text-align: right; vertical-align: top;">
+                            <div style="display: block; float: right; border-bottom: 3px double #2c3e50; padding: 8px 12px; min-width: 200px; text-align: right;">
                                 <span style="font-size: 12px; display: block; text-transform: uppercase; color: #444444 !important; font-weight: bold; letter-spacing: 0.5px; margin-bottom: 5px;">AMOUNT DUE (LKR)</span>
-                                <span id="pdf-total-val" style="font-size: 24px; font-weight: bold; color: #000000 !important; display: block; visibility: visible !important; opacity: 1 !important;">0.00</span>
+                                <span id="pdf-total-val" style="font-size: 26px; font-weight: bold; color: #000000 !important; display: block; visibility: visible !important; opacity: 1 !important; line-height: 1.2;">0.00</span>
                             </div>
                         </td>
                     </tr>
