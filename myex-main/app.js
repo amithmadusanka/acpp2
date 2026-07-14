@@ -87,7 +87,6 @@ function generatePDF(type) {
     const docDate = document.getElementById(`${prefix}doc-date`).value || new Date().toLocaleDateString();
     const itemsContainer = document.getElementById(isInvoice ? 'invoice-items-list' : 'quote-items-list');
 
-    // Map Dynamic Document Elements
     document.getElementById('pdf-comp-name').innerText = document.getElementById('comp-name').value;
     document.getElementById('pdf-comp-details').innerText = document.getElementById('comp-details').value;
     document.getElementById('pdf-title').innerText = type;
@@ -120,10 +119,10 @@ function generatePDF(type) {
             const rowBg = index % 2 === 0 ? '#ffffff' : '#fcfcfc';
             pdfItems.innerHTML += `
                 <tr style="background-color: ${rowBg}; color: #000000 !important;">
-                    <td style="padding: 10px; border-bottom: 1px solid #e2e8f0; color: #000000 !important;">${desc}</td>
-                    <td style="text-align: center; padding: 10px; border-bottom: 1px solid #e2e8f0; color: #000000 !important;">${qty}</td>
-                    <td style="text-align: right; padding: 10px; border-bottom: 1px solid #e2e8f0; color: #000000 !important;">${price.toFixed(2)}</td>
-                    <td style="text-align: right; padding: 10px; border-bottom: 1px solid #e2e8f0; font-weight: bold; color: #000000 !important;">${total.toFixed(2)}</td>
+                    <td style="padding: 10px; border-bottom: 1px solid #e2e8f0; color: #000000 !important; font-size: 13px;">${desc}</td>
+                    <td style="text-align: center; padding: 10px; border-bottom: 1px solid #e2e8f0; color: #000000 !important; font-size: 13px;">${qty}</td>
+                    <td style="text-align: right; padding: 10px; border-bottom: 1px solid #e2e8f0; color: #000000 !important; font-size: 13px;">${price.toFixed(2)}</td>
+                    <td style="text-align: right; padding: 10px; border-bottom: 1px solid #e2e8f0; font-weight: bold; color: #000000 !important; font-size: 13px;">${total.toFixed(2)}</td>
                 </tr>
             `;
         }
@@ -135,8 +134,6 @@ function generatePDF(type) {
     }
 
     const finalFormattedTotal = pdfCalculatedTotal.toFixed(2);
-    
-    // මෙතැනදී අගය කෙලින්ම PDF එකට තල්ලු කර බලපෑම ස්ථිර කරයි.
     document.getElementById('pdf-total-val').innerText = finalFormattedTotal;
 
     let templateRoot = document.getElementById('pdf-template').querySelector('.pdf-wrapper');
