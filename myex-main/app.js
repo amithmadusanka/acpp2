@@ -19,7 +19,6 @@ window.addEventListener('DOMContentLoaded', () => {
 });
 
 // Register the service worker so the app (and the PDF library) actually work offline.
-// Without this registration call, sw.js was never installed and nothing was cached.
 if ('serviceWorker' in navigator) {
     window.addEventListener('load', () => {
         navigator.serviceWorker.register('sw.js').catch(err => {
@@ -88,7 +87,6 @@ function generatePDF(type) {
     const clientPhone = document.getElementById(`${prefix}client-phone`).value || 'N/A';
     const docDate = document.getElementById(`${prefix}doc-date`).value || new Date().toLocaleDateString();
     const itemsContainer = document.getElementById(isInvoice ? 'invoice-items-list' : 'quote-items-list');
-    const finalAmount = document.getElementById(isInvoice ? 'invoice-grand-total' : 'quote-grand-total').innerText;
 
     // Map Dynamic Document Elements
     document.getElementById('pdf-comp-name').innerText = document.getElementById('comp-name').value;
@@ -107,16 +105,19 @@ function generatePDF(type) {
     pdfItems.innerHTML = '';
     
     let itemsLogArray = [];
+    let pdfCalculatedTotal = 0; // PDF එකේ අඩංගු වන සියලුම අයිතමවල එකතුව ගණනය කිරීමට
     const rows = itemsContainer.querySelectorAll('.item-row');
     
     rows.forEach((row, index) => {
-        const desc = row.querySelector('.item-desc').value;
+        const desc = row.querySelector('.item-desc').value.trim();
         const qty = parseFloat(row.querySelector('.item-qty').value) || 0;
         const price = parseFloat(row.querySelector('.item-price').value) || 0;
         const total = qty * price;
 
         if(desc) {
             itemsLogArray.push({ desc, qty, price });
+            pdfCalculatedTotal += total; // වලංගු අයිතමවල එකතුව පමණක් මෙහිදී එකතු වේ
+            
             const rowBg = index % 2 === 0 ? '#ffffff' : '#fcfcfc';
             pdfItems.innerHTML += `
                 <tr style="background-color: ${rowBg}">
@@ -134,7 +135,9 @@ function generatePDF(type) {
         return;
     }
 
-    document.getElementById('pdf-total-val').innerText = finalAmount;
+    // නිවැරදිම ගණනය කළ එකතුව (LKR Total) PDF එකේ අදාළ ස්ථානයට යැවීම
+    const finalFormattedTotal = pdfCalculatedTotal.toFixed(2);
+    document.getElementById('pdf-total-val').innerText = finalFormattedTotal;
 
     // Add Software Credit Row dynamically inside the print template before rendering
     let templateRoot = document.getElementById('pdf-template').querySelector('.pdf-wrapper');
@@ -147,24 +150,15 @@ function generatePDF(type) {
     }
 
     if(itemsLogArray.length > 0) {
-        saveDocumentToHistory(type, docNum, clientName, finalAmount, docDate);
+        // හිස්ට්‍රි එකටත් මේ නිවැරදි එකතුවම යවන්න සකසා ඇත
+        saveDocumentToHistory(type, docNum, clientName, finalFormattedTotal, docDate);
     }
 
     const element = document.getElementById('pdf-template');
     element.style.display = 'block';
 
-    // html2canvas positions its capture using the page's current scroll offset.
-    // Since #pdf-template sits at the very bottom of the document (after all the
-    // form content) and is only switched from display:none -> block right before
-    // capture, whatever the page had scrolled to gets baked into the render:
-    // the top of the PDF comes out blank (equal to the scroll distance) and the
-    // same amount gets sliced off the bottom of the invoice. Resetting scroll to
-    // the top first, and forcing scrollX/scrollY to 0 in html2canvas, makes the
-    // capture always start at the top-left of the element regardless of where
-    // the user had scrolled to on screen.
     window.scrollTo(0, 0);
 
-    // Configured configurations to maintain proportions and auto page split elegantly
     const opt = {
         margin:       [12, 12, 12, 12],
         filename:     `${docNum}_${clientName}.pdf`,
