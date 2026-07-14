@@ -1,0 +1,123 @@
+:root {
+    --brand-bg: #8c2d19;
+    --body-bg: #f5eedc;
+    --card-bg: #ffffff;
+    --text-dark: #3a3028;
+    --border-color: #d8cea8;
+    --active-orange: #d35400;
+}
+
+* { box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
+body { font-family: -apple-system, system-ui, sans-serif; background-color: #111; margin: 0; padding: 0; }
+
+.app-container {
+    max-width: 480px; margin: 0 auto; background-color: var(--body-bg);
+    min-height: 100vh; display: flex; flex-direction: column; position: relative;
+}
+
+.app-header {
+    background-color: var(--brand-bg); color: white; padding: 20px 15px 35px 15px;
+    border-bottom-left-radius: 25px; border-bottom-right-radius: 25px;
+    display: flex; justify-content: space-between; align-items: flex-start;
+}
+
+.brand-tag { background: rgba(255,255,255,0.2); padding: 2px 6px; font-size: 10px; font-weight: bold; border-radius: 4px; }
+.app-header h1 { font-size: 18px; margin: 4px 0 2px 0; }
+.app-header p { margin: 0; font-size: 12px; opacity: 0.8; }
+.status-badge { background: rgba(0,0,0,0.2); font-size: 11px; padding: 4px 10px; border-radius: 12px; }
+
+.page-body { flex: 1; padding: 15px; margin-top: -20px; padding-bottom: 90px; }
+.app-page { display: none; }
+.app-page.active { display: block; animation: fadeIn 0.25s ease; }
+
+.page-title-area h2 { font-size: 19px; margin: 0 0 15px 0; display: flex; align-items: center; justify-content: space-between; }
+.sub-badge { font-size: 11px; padding: 3px 8px; border-radius: 10px; }
+.sub-badge.final { background: #fce4ec; color: #c2185b; }
+.sub-badge.estimate { background: #e0f2f1; color: #004d40; }
+
+.form-card { background: var(--card-bg); border-radius: 16px; padding: 18px; box-shadow: 0 4px 12px rgba(0,0,0,0.04); }
+.input-row-flex { display: flex; gap: 10px; }
+.flex-1 { flex: 1; }
+.input-group { margin-bottom: 14px; }
+.input-group label { display: block; font-size: 11px; font-weight: 700; color: #7d7265; margin-bottom: 5px; }
+
+input[type="text"], input[type="number"], input[type="tel"], input[type="date"], textarea {
+    width: 100%; padding: 12px; border: 1px solid #e2dac2; border-radius: 10px;
+    background-color: #faf8f2; font-size: 16px; color: var(--text-dark);
+}
+/* font-size 16px above prevents iOS Safari from auto-zooming the page on input focus */
+
+.items-fieldset { border: 1px dashed #d5ccb2; border-radius: 10px; padding: 12px; margin: 15px 0; }
+legend { font-size: 11px; font-weight: bold; color: #8c8071; padding: 0 6px; }
+.item-row { display: flex; gap: 6px; margin-bottom: 8px; }
+
+.btn-submit { width: 100%; padding: 14px; border-radius: 10px; font-weight: bold; border: none; cursor: pointer; }
+.main-action { background: #e67e22; color: white; }
+.black-btn { background: #2c3e50; color: white; }
+.green-btn { background: #27ae60; color: white; }
+.btn-add { background: none; border: 1px solid var(--brand-bg); color: var(--brand-bg); width: 100%; padding: 8px; border-radius: 8px; font-weight: bold; }
+.btn-del { background: #e74c3c; color: white; border: none; border-radius: 6px; padding: 0 10px; }
+
+.total-bar { text-align: right; font-size: 18px; font-weight: bold; margin: 15px 0; color: var(--brand-bg); }
+.saved-header { font-weight: bold; font-size: 12px; margin-bottom: 15px; color: #7d7265; border-bottom: 1px solid #ddd; padding-bottom: 5px;}
+
+.history-card {
+    background: #faf8f2; border: 1px solid #e2dac2; padding: 12px;
+    border-radius: 10px; margin-bottom: 10px; display: flex; justify-content: space-between; align-items: center;
+}
+.history-meta h4 { margin: 0 0 4px 0; color: #2c3e50; font-size: 14px; }
+.history-meta p { margin: 0; font-size: 12px; color: #7f8c8d; }
+
+#logo-preview { border: 2px dashed #bbb; border-radius: 10px; padding: 20px; text-align: center; color: #777; background: #fafafa; background-size: cover; background-position: center; height: 90px; }
+.footer-credit { text-align: center; font-size: 11px; margin-top: 30px; color: #aaa; }
+
+.bottom-nav { position: fixed; bottom: 0; left: 50%; transform: translateX(-50%); width: 100%; max-width: 480px; background: #fff; display: flex; border-top: 1px solid #eee; padding-bottom: env(safe-area-inset-bottom); z-index: 999; }
+.nav-item { flex: 1; display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 10px 0; background: none; border: none; color: #95a5a6; cursor: pointer;}
+.nav-item.active { color: var(--active-orange); }
+.nav-icon { font-size: 18px; margin-bottom: 2px; }
+.nav-label { font-size: 11px; font-weight: 600; }
+
+@keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+
+/* ========================================================
+   HIGH QUALITY PDF EXPORT PRINT STYLES (WITH DOUBLE BORDER)
+   ======================================================== */
+.pdf-wrapper {
+    padding: 10px;
+    background: #fff;
+    color: #000;
+    font-family: Arial, sans-serif;
+    box-sizing: border-box;
+    width: 100%;
+    /* Outer frame line. Two nested solid borders (see .pdf-inner-frame) render
+       reliably under html2canvas, unlike border-style:double which can be
+       drawn inconsistently (or dropped) by the canvas renderer used for PDF export. */
+    border: 3px solid #2c3e50;
+    position: relative;
+}
+.pdf-inner-frame {
+    border: 1px solid #2c3e50;
+    padding: 22px;
+    box-sizing: border-box;
+}
+.pdf-head-row { display: flex; justify-content: space-between; align-items: flex-start; border-bottom: 2px solid #2c3e50; padding-bottom: 15px; }
+.pdf-main-table th { border-bottom: 2px solid #2c3e50; text-transform: uppercase; font-weight: bold; }
+.pdf-main-table td { padding: 10px; border-bottom: 1px solid #e2e8f0; font-size: 13px; }
+
+/* Fixed page-break gaps to cleanly support 2-page documents if text gets long */
+.pdf-bottom-block, .pdf-signature-area, .pdf-footer-branding { 
+    page-break-inside: avoid; 
+    break-inside: avoid; 
+}
+
+.pdf-footer-branding {
+    margin-top: 50px;
+    text-align: center;
+    font-size: 10px;
+    font-weight: bold;
+    color: #bdc3c7;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    border-top: 1px dashed #e2e8f0;
+    padding-top: 10px;
+}

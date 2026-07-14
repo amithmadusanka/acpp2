@@ -1,0 +1,29 @@
+{
+  "short_name": "CoolTech",
+  "name": "CoolTech AC Invoice & Quotation",
+  "icons": [
+    {
+      "src": "icons/icon-192.png",
+      "type": "image/png",
+      "sizes": "192x192",
+      "purpose": "any"
+    },
+    {
+      "src": "icons/icon-512.png",
+      "type": "image/png",
+      "sizes": "512x512",
+      "purpose": "any"
+    },
+    {
+      "src": "icons/icon-maskable-512.png",
+      "type": "image/png",
+      "sizes": "512x512",
+      "purpose": "maskable"
+    }
+  ],
+  "start_url": "./index.html",
+  "background_color": "#f5eedc",
+  "theme_color": "#8c2d19",
+  "display": "standalone",
+  "orientation": "portrait"
+}
