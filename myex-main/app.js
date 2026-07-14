@@ -18,7 +18,6 @@ window.addEventListener('DOMContentLoaded', () => {
     document.getElementById('quote-doc-date').value = today;
 });
 
-// Register the service worker so the app (and the PDF library) actually work offline.
 if ('serviceWorker' in navigator) {
     window.addEventListener('load', () => {
         navigator.serviceWorker.register('sw.js').catch(err => {
@@ -105,7 +104,7 @@ function generatePDF(type) {
     pdfItems.innerHTML = '';
     
     let itemsLogArray = [];
-    let pdfCalculatedTotal = 0; // PDF වගුව ඇතුළතම මුළු එකතුව අලුතින් ගණනය කිරීමට
+    let pdfCalculatedTotal = 0;
     const rows = itemsContainer.querySelectorAll('.item-row');
     
     rows.forEach((row, index) => {
@@ -116,15 +115,15 @@ function generatePDF(type) {
 
         if(desc) {
             itemsLogArray.push({ desc, qty, price });
-            pdfCalculatedTotal += total; // වලංගු අයිතමවල එකතුව පමණක් එකතු වේ
+            pdfCalculatedTotal += total;
             
             const rowBg = index % 2 === 0 ? '#ffffff' : '#fcfcfc';
             pdfItems.innerHTML += `
-                <tr style="background-color: ${rowBg}">
-                    <td style="padding: 10px; border-bottom: 1px solid #e2e8f0;">${desc}</td>
-                    <td style="text-align: center; padding: 10px; border-bottom: 1px solid #e2e8f0;">${qty}</td>
-                    <td style="text-align: right; padding: 10px; border-bottom: 1px solid #e2e8f0;">${price.toFixed(2)}</td>
-                    <td style="text-align: right; padding: 10px; border-bottom: 1px solid #e2e8f0; font-weight: bold;">${total.toFixed(2)}</td>
+                <tr style="background-color: ${rowBg}; color: #000000 !important;">
+                    <td style="padding: 10px; border-bottom: 1px solid #e2e8f0; color: #000000 !important;">${desc}</td>
+                    <td style="text-align: center; padding: 10px; border-bottom: 1px solid #e2e8f0; color: #000000 !important;">${qty}</td>
+                    <td style="text-align: right; padding: 10px; border-bottom: 1px solid #e2e8f0; color: #000000 !important;">${price.toFixed(2)}</td>
+                    <td style="text-align: right; padding: 10px; border-bottom: 1px solid #e2e8f0; font-weight: bold; color: #000000 !important;">${total.toFixed(2)}</td>
                 </tr>
             `;
         }
@@ -135,13 +134,11 @@ function generatePDF(type) {
         return;
     }
 
-    // නිවැරදිව ගණනය කළ අවසාන මුළු එකතුව (Formatted Total)
     const finalFormattedTotal = pdfCalculatedTotal.toFixed(2);
     
-    // PDF එකෙහි අගය පෙන්වන span එකට මෙම නිවැරදි අගය ආදේශ කිරීම
+    // මෙතැනදී අගය කෙලින්ම PDF එකට තල්ලු කර බලපෑම ස්ථිර කරයි.
     document.getElementById('pdf-total-val').innerText = finalFormattedTotal;
 
-    // Add Software Credit Row dynamically inside the print template before rendering
     let templateRoot = document.getElementById('pdf-template').querySelector('.pdf-wrapper');
     let dynamicBranding = templateRoot.querySelector('.pdf-footer-branding');
     if (!dynamicBranding) {
