@@ -50,7 +50,7 @@
                     <fieldset class="items-fieldset">
                         <legend>MENU ITEMS / SERVICES</legend>
                         <div id="invoice-items-list">
-                            </div>
+                        </div>
                         <button type="button" class="btn-add" onclick="addItemRow('invoice-items-list')">+ Add Service Item</button>
                     </fieldset>
 
@@ -84,7 +84,7 @@
                     <fieldset class="items-fieldset">
                         <legend>QUOTATION ITEMS</legend>
                         <div id="quote-items-list">
-                            </div>
+                        </div>
                         <button type="button" class="btn-add" onclick="addItemRow('quote-items-list')">+ Add Quote Item</button>
                     </fieldset>
 
@@ -100,7 +100,7 @@
                 <div class="form-card">
                     <div class="saved-header">RECENT TRANSACTIONS</div>
                     <div id="history-items-container">
-                        </div>
+                    </div>
                 </div>
             </div>
 
@@ -147,9 +147,9 @@
         </div>
     </div>
 
-    <div id="pdf-template" style="display: none; background: #fff;">
-        <div class="pdf-wrapper">
-          <div class="pdf-inner-frame">
+    <div id="pdf-template" style="display: none; background: #ffffff !important; color: #000000 !important;">
+        <div class="pdf-wrapper" style="background: #ffffff !important; color: #000000 !important;">
+          <div class="pdf-inner-frame" style="background: #ffffff !important;">
 
             <div class="pdf-head-row">
                 <div>
@@ -170,20 +170,20 @@
                 <p style="margin: 0; font-size: 13px; color: #475569;"><strong>Phone:</strong> <span id="pdf-phone">N/A</span></p>
             </div>
 
-            <table class="pdf-main-table" style="width: 100%; border-collapse: collapse; margin-top: 15px;">
+            <table class="pdf-main-table" style="width: 100%; border-collapse: collapse; margin-top: 15px; color: #000000 !important;">
                 <thead>
                     <tr style="background-color: #2c3e50; color: white; text-align: left;">
-                        <th style="padding: 10px; font-size: 12px; width: 55%;">DESCRIPTION / SERVICE RENDERED</th>
-                        <th style="padding: 10px; font-size: 12px; text-align: center; width: 10%;">QTY</th>
-                        <th style="padding: 10px; font-size: 12px; text-align: right; width: 15%;">UNIT PRICE</th>
-                        <th style="padding: 10px; font-size: 12px; text-align: right; width: 20%;">TOTAL</th>
+                        <th style="padding: 10px; font-size: 12px; width: 55%; color: white !important;">DESCRIPTION / SERVICE RENDERED</th>
+                        <th style="padding: 10px; font-size: 12px; text-align: center; width: 10%; color: white !important;">QTY</th>
+                        <th style="padding: 10px; font-size: 12px; text-align: right; width: 15%; color: white !important;">UNIT PRICE</th>
+                        <th style="padding: 10px; font-size: 12px; text-align: right; width: 20%; color: white !important;">TOTAL</th>
                     </tr>
                 </thead>
-                <tbody id="pdf-items">
-                    </tbody>
+                <tbody id="pdf-items" style="color: #000000 !important;">
+                </tbody>
             </table>
 
-            <div class="pdf-bottom-block" style="margin-top: 30px;">
+            <div class="pdf-bottom-block" style="margin-top: 40px; color: #000000 !important;">
                 <table style="width: 100%; border-collapse: collapse;">
                     <tr>
                         <td style="width: 50%; vertical-align: bottom;">
@@ -193,9 +193,9 @@
                             </div>
                         </td>
                         <td style="width: 50%; text-align: right; vertical-align: top;">
-                            <div style="display: inline-block; border-bottom: 3px double #2c3e50; padding: 4px 8px; min-width: 180px;">
-                                <span style="font-size: 12px; display: block; text-transform: uppercase; color: #555; font-weight: bold; letter-spacing: 0.5px; margin-bottom: 5px;">Amount Due (LKR)</span>
-                                <span id="pdf-total-val" style="font-size: 22px; font-weight: bold; color: #2c3e50; display: block;">0.00</span>
+                            <div style="display: inline-block; border-bottom: 3px double #2c3e50; padding: 5px 10px; min-width: 200px; text-align: right;">
+                                <span style="font-size: 12px; display: block; text-transform: uppercase; color: #444444 !important; font-weight: bold; letter-spacing: 0.5px; margin-bottom: 5px;">AMOUNT DUE (LKR)</span>
+                                <span id="pdf-total-val" style="font-size: 24px; font-weight: bold; color: #000000 !important; display: block; visibility: visible !important; opacity: 1 !important;">0.00</span>
                             </div>
                         </td>
                     </tr>
@@ -204,6 +204,7 @@
 
           </div>
         </div>
-    </div> <script src="app.js"></script>
+    </div>
+    <script src="app.js"></script>
 </body>
 </html>
